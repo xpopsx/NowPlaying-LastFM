@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+
+<body bgcolor="#808080">
+
+
+<img id="image" src="null" style="float:left; height:64px; width:64px"/>
+<h3 style="margin-left: 40px" id=textName></p>
+<h4 style="margin-left: 40px" id=textArtist></p>
+
+<script>
+//=========================================================================================
+var API_key = 'key'; // user API key https://www.last.fm/api/accounts (or create new one)
+var username = 'username'; // username https://www.last.fm/
+var updateTime = 1; // update time in seconds
+//=========================================================================================
+
+var requestURL =  `http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${API_key}&format=json&limit=1`;
+
+var info = 
+	{
+    title: "null",
+    artist: "null",
+    image: "null"
+	};
+
+var updateFunction = function() {
+    var Httpreq = new XMLHttpRequest(); // a new request
+    Httpreq.open("GET",requestURL,false);
+    Httpreq.send(null);
+	requestJson = JSON.parse(Httpreq.responseText);
+	requestJson = requestJson.recenttracks.track[0];
+	
+	info.title = requestJson.name;
+	info.artist = requestJson.artist['#text'];
+	// array image size : [0] - small, [1] - middle, [2] - big
+	info.image = requestJson.image[1]['#text'];
+	
+	//song title
+	document.getElementById('textName').innerHTML = info.title;
+	//artist
+	document.getElementById('textArtist').innerHTML = info.artist;
+	//image
+	document.getElementById('image').setAttribute("src",info.image);
+}
+setInterval(updateFunction, updateTime * 1000);
+</script>
+
+</body>
+</html>
