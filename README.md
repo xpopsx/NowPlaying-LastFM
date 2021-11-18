@@ -6,7 +6,7 @@ ___
 1. Link you Spotify or other service what able on LastFM to scrobble (https://www.last.fm/ru/settings/applications)
 2. Download html page and put anywhere you what
 3. Open file on text editor (like notepad) and change `API_KEY` and `username` to your LastFM username,apikey accordingly
-5. On OBS (or like that) add new "browser" source, past link to you file (like "c://NowPlaying.html)
+5. On OBS (or like that) add new "browser" source, past link to you file (like `c://NowPlaying.html`)
 6. Enjoy
 ___
 
